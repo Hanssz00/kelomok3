@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Sholat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button onclick="window.history.back()">⬅ Kembali</button>
+  <h1 id="title"></h1>
+  <div id="steps"></div>
+
+  <script>
+    const prayers = {
+      "subuh": {
+        name: "Sholat Subuh",
+        rakaat: 2,
+        steps: [
+          "Niat sholat Subuh 2 rakaat.",
+          "Takbiratul ihram (mengangkat tangan dan membaca 'Allahu Akbar').",
+          "Membaca doa iftitah (sunnah).",
+          "Membaca Surah Al-Fatihah dan surah pendek.",
+          "Ruku’, i’tidal, sujud dua kali, dan duduk di antara dua sujud.",
+          "Bangkit untuk rakaat kedua dan ulangi bacaan seperti rakaat pertama.",
+          "Tahiyat akhir dan salam."
+        ]
+      },
+      "dzuhur": {
+        name: "Sholat Dzuhur",
+        rakaat: 4,
+        steps: [
+          "Niat sholat Dzuhur 4 rakaat.",
+          "Lakukan seperti sholat Subuh, tetapi 4 rakaat.",
+          "Tahiyat awal pada rakaat kedua, tahiyat akhir pada rakaat keempat."
+        ]
+      },
+      "ashar": {
+        name: "Sholat Ashar",
+        rakaat: 4,
+        steps: [
+          "Niat sholat Ashar 4 rakaat.",
+          "Gerakan dan bacaannya sama seperti sholat Dzuhur."
+        ]
+      },
+      "maghrib": {
+        name: "Sholat Maghrib",
+        rakaat: 3,
+        steps: [
+          "Niat sholat Maghrib 3 rakaat.",
+          "Tahiyat awal pada rakaat kedua, tahiyat akhir pada rakaat ketiga."
+        ]
+      },
+      "isya": {
+        name: "Sholat Isya",
+        rakaat: 4,
+        steps: [
+          "Niat sholat Isya 4 rakaat.",
+          "Gerakan dan bacaannya sama seperti sholat Dzuhur."
+        ]
+      }
+    };
+
+    
+    const params = new URLSearchParams(window.location.search);
+    const prayerKey = params.get("p");
+
+    const prayer = prayers[prayerKey];
+    if (prayer) {
+      document.getElementById("title").textContent = `${prayer.name} (${prayer.rakaat} rakaat)`;
+      const stepsDiv = document.getElementById("steps");
+
+      prayer.steps.forEach((s, i) => {
+        const stepEl = document.createElement("p");
+        stepEl.textContent = `${i + 1}. ${s}`;
+        stepsDiv.appendChild(stepEl);
+      });
+    } else {
+      document.getElementById("title").textContent = "Sholat tidak ditemukan.";
+    }
+  </script>
+</body>
+</html>
